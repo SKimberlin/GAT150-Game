@@ -4,6 +4,9 @@
 #include "Framework/Scene.h"
 #include "Input/InputSystem.h"
 #include "Renderer/Renderer.h"
+#include "Framework/Components/SpriteComponent.h"
+#include "Framework/Resource/ResourceManager.h"
+#include "Framework/Components/PhysicsComponent.h"
 
 void Player::Update(float dt)
 {
@@ -19,7 +22,9 @@ void Player::Update(float dt)
 	if (kiko::g_inputSystem.GetKeyDown(SDL_SCANCODE_W)) thrust = 1;
 
 	kiko::vec2 forward = kiko::vec2{0, -1}.Rotate(m_transform.rotation);
-	AddForce(forward * m_speed * thrust);
+
+	auto physicsComponent = GetComponent<kiko::PhysicsComponent>();
+	physicsComponent->ApplyForce(forward * m_speed * thrust);
 
 	//m_transform.position += forward * m_speed * thrust * kiko::g_time.GetDeltaTime();
 	m_transform.position.x = kiko::Wrap(m_transform.position.x, (float)kiko::g_renderer.GetWidth());
@@ -30,8 +35,13 @@ void Player::Update(float dt)
 	{
 		//create weapon
 		kiko::Transform transform{ m_transform.position, m_transform.rotation, 0.5f };
-		std::unique_ptr<Weapon> weapon = std::make_unique<Weapon>( 400.0f, transform, kiko::g_manager.Get("PlayerBullet.txt"));
+		std::unique_ptr<Weapon> weapon = std::make_unique<Weapon>( 400.0f, transform );
 		weapon->m_tag = "PlayerBullet";
+
+		//std::unique_ptr<kiko::SpriteComponent> component = std::make_unique<kiko::SpriteComponent>();
+		//component->m_texture = kiko::g_resources.Get<kiko::Texture>("Rocket.png", kiko::g_renderer);
+		//weapon->AddComponent(std::move(component));
+
 		m_scene->Add(std::move(weapon));
 
 		kiko::g_audioSystem.PlayOneShot("Laser_Shoot");
@@ -44,8 +54,13 @@ void Player::Update(float dt)
 		{
 			//create weapon
 			kiko::Transform transform{ m_transform.position, kiko::DegreesToRadians(i), 0.5f };
-			std::unique_ptr<Weapon> weapon = std::make_unique<Weapon>(400.0f, transform, kiko::g_manager.Get("PlayerBullet.txt"));
+			std::unique_ptr<Weapon> weapon = std::make_unique<Weapon>(400.0f, transform);
 			weapon->m_tag = "PlayerBullet";
+
+			//std::unique_ptr<kiko::SpriteComponent> component = std::make_unique<kiko::SpriteComponent>();
+			//component->m_texture = kiko::g_resources.Get<kiko::Texture>("Rocket.png", kiko::g_renderer);
+			//weapon->AddComponent(std::move(component));
+
 			m_scene->Add(std::move(weapon));
 			m_burstWeaponTimer = m_burstWeaponTime;
 			kiko::g_audioSystem.PlayOneShot("FireBall");
