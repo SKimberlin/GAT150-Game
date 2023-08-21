@@ -1,1 +1,8 @@
-INFO: Main.cpp(26) wakarimashita
+INFO: Factory.h(69) Class registered: Weapon
+INFO: Factory.h(69) Class registered: SpriteRenderComponent
+INFO: Factory.h(69) Class registered: ModelRenderComponent
+INFO: Factory.h(69) Class registered: EnginePhysicsComponent
+INFO: Factory.h(69) Class registered: CircleCollisionComponent
+INFO: Factory.h(69) Class registered: Actor
+INFO: Main.cpp(26) Main Start
+INFO: Factory.h(77) Prototype Class registered: Rocket

@@ -1,10 +1,8 @@
 #include "Logger.h"
 #include "FileIO.h"
-#include <iostream>
 
 namespace kiko
 {
-	Logger g_logger(LogLevel::Info, &std::cout, "Log.txt");
 
 	bool Logger::Log(LogLevel logLevel, const std::string& filename, int line)
 	{

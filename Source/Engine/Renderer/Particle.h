@@ -1,9 +1,9 @@
 #pragma once
 #include "Core/Core.h"
-#include "Renderer.h"
 
 namespace kiko
 {
+	class Renderer;
 
 	struct ParticleData
 	{

@@ -1,15 +1,15 @@
 #include "Core/Core.h"
 #include "Renderer/Renderer.h"
 #include "Input/InputSystem.h"
-#include "Renderer/ModelManager.h"
 #include "Player.h"
 #include "Enemy.h"
 #include "Renderer/Font.h"
 #include "Renderer/Text.h"
 #include "Audio/AudioSystem.h"
-#include "Framework/Scene.h"
-#include "Framework/Resource/ResourceManager.h"
 #include "Renderer/Texture.h"
+#include "Physics/PhysicsSystem.h"
+
+#include "Framework/Framework.h"
 
 #include "SpaceGame.h"
 
@@ -23,7 +23,7 @@ using namespace std;
 int main(int argc, char* argv[])
 {
 	
-	INFO_LOG("wakarimashita");
+	INFO_LOG("Main Start");
 
 	kiko::MemoryTracker::Initialize();
 
@@ -34,6 +34,7 @@ int main(int argc, char* argv[])
 	kiko::g_renderer.CreateWindow("CSC195", 800, 600);
 	kiko::g_inputSystem.Initialize();
 	kiko::g_audioSystem.Initialize();
+	kiko::PhysicsSystem::Instance().Initialize();
 	
 	unique_ptr<SpaceGame> game = make_unique<SpaceGame>();
 	game->Initialize();
