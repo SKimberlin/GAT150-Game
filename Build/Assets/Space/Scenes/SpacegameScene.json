@@ -1,0 +1,97 @@
+{
+	"actors": [
+		{
+			"type": "Actor",
+			"name": "Background",
+			"persistent": true,
+			"transform": {
+				"position": [ 400, 300 ],
+				"scale": 1.3,
+				"rotation": 0
+			},
+			"components": [
+				{
+					"type": "SpriteRenderComponent",
+					"textureName": "space_background.png"
+				}
+			]
+		},
+		{
+			"type": "Weapon",
+			"name": "Rocket",
+			"prototype": true,
+			"tag": "PlayerBullet",
+			"lifespan": 3,
+			"transform": {
+				"position": [ 400, 300 ],
+				"scale": 1,
+				"rotation": 0
+			},
+			"speed": 400,
+			"components": [
+				{
+					"type": "SpriteRenderComponent",
+					"textureName": "Rocket.png"
+				},
+				{
+					"type": "Box2DPhysicsComponent",
+					"damping": 0,
+					"angularDamping": 2,
+					"gravityScale": 0
+				},
+				{
+					"type": "Box2DCollisionComponent",
+					"size": [ 32, 32 ],
+					"isTrigger": true
+				}
+			]
+		},
+		{
+			"type": "Actor",
+			"name": "Title",
+			"persistent": true,
+			"transform": {
+				"position": [ 400, 300 ],
+				"scale": 2,
+				"rotation": 0
+			},
+			"components": [
+				{
+					"type": "TextRenderComponent",
+					"fontName": "Starlight.ttf",
+					"fontSize": 24,
+					"text": "ASTEROIDZ"
+				}
+			]
+		},
+		{
+			"type": "Player",
+			"name": "Player",
+			"prototype": true,
+			"tag": "Player",
+			"transform": {
+				"position": [ 400, 300 ],
+				"scale": 1,
+				"rotation": 0
+			},
+			"speed": 30,
+			"turnRate": 0.5,
+			"components": [
+				{
+					"type": "SpriteRenderComponent",
+					"textureName": "MainShip.png"
+				},
+				{
+					"type": "Box2DPhysicsComponent",
+					"damping": 0.98,
+					"angularDamping": 2,
+					"gravityScale": 0
+				},
+				{
+					"type": "Box2DCollisionComponent",
+					"size": [ 32, 32 ]
+				}
+			]
+		}
+	]
+}

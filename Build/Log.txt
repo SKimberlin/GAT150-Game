@@ -1,8 +1,15 @@
-INFO: Factory.h(69) Class registered: Weapon
+INFO: Factory.h(69) Class registered: TextRenderComponent
 INFO: Factory.h(69) Class registered: SpriteRenderComponent
+INFO: Factory.h(69) Class registered: SpriteAnimRenderComponent
 INFO: Factory.h(69) Class registered: ModelRenderComponent
 INFO: Factory.h(69) Class registered: EnginePhysicsComponent
 INFO: Factory.h(69) Class registered: CircleCollisionComponent
+INFO: Factory.h(69) Class registered: Box2DPhysicsComponent
+INFO: Factory.h(69) Class registered: Box2DCollisionComponent
 INFO: Factory.h(69) Class registered: Actor
-INFO: Main.cpp(26) Main Start
-INFO: Factory.h(77) Prototype Class registered: Rocket
+INFO: Main.cpp(23) Main Start
+WARNING: FileIO.cpp(41) File not loaded: Scenes/PlatformerGameScene.json
+WARNING: Json.cpp(17) Cannot open file: Scenes/PlatformerGameScene.json
+ERROR: Scene.cpp(73) Could not load scene file: Scenes/PlatformerGameScene.json
+INFO: EventManager.cpp(18) Event subscribed: OnAddPoints
+INFO: EventManager.cpp(18) Event subscribed: OnAddPoints

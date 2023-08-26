@@ -83,7 +83,7 @@ namespace kiko
 
 		if (HAS_DATA(value, transform)) transform.Read(GET_DATA(value, transform));
 
-		if (HAS_DATA(value, components) && GET_DATA(value, components).IsArray()) //idk
+		if (HAS_DATA(value, components) && GET_DATA(value, components).IsArray())
 		{
 			for (auto& componentValue : GET_DATA(value, components).GetArray())
 			{
