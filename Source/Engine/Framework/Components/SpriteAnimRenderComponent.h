@@ -29,8 +29,11 @@ namespace kiko
 		bool Initialize() override;
 		void Update(float dt) override;
 
-		void SetSequence(const std::string& name);
+		void SetSequence(const std::string& name, bool update = true);
 		void UpdateSource();
+
+		std::string GetSequenceName() { return m_sequence->name; }
+		bool IsEndFrame() { return frame == m_sequence->endFrame; }
 
 	public:
 		int frame = 0;

@@ -19,19 +19,20 @@ bool PlatformerGame::Initialize()
     kiko::g_audioSystem.AddAudio("MuchHigher", "MuchHigher.wav");
     kiko::g_audioSystem.PlayOneShot("MuchHigher", true);
 
-    m_scene = std::make_unique<kiko::Scene>();
-    m_scene->Load("Scenes/PlatformerGameScene.json");
-    m_scene->Initialize();
-
     // add events
     EVENT_SUBSCRIBE("OnAddPoints", PlatformerGame::OnAddPoints);
-    EVENT_SUBSCRIBE("OnAddPoints", PlatformerGame::OnPlayerDead);
+    EVENT_SUBSCRIBE("OnPlayerDead", PlatformerGame::OnPlayerDead);
+    EVENT_SUBSCRIBE("OnLevelComplete", PlatformerGame::OnLevelComplete);
 
     //kiko::EventManager::Instance().Subscribe("OnAddPoints", this, std::bind(&PlatformerGame::OnAddPoints, this, std::placeholders::_1));
     //kiko::EventManager::Instance().Subscribe("OnPlayerDead", this, std::bind(&PlatformerGame::OnPlayerDead, this, std::placeholders::_1));
     m_scene = std::make_unique<kiko::Scene>();
     m_scene->Load("Scenes/PlatformerScene.json");
+    m_scene->Load("Scenes/tilemap.json");
+    m_scene->Load("Scenes/prototypes.json");
     m_scene->Initialize();
+
+    
 
     return true;
 }
@@ -45,14 +46,30 @@ void PlatformerGame::Update(float dt)
     switch (m_state)
     {
     case PlatformerGame::Title:
+    {
         m_scene->GetActorByName("Title")->active = true;
-        m_scene->GetActorByName("Background")->active = false;
+        if (kiko::g_inputSystem.GetKeyDown(SDL_SCANCODE_SPACE))
+        {
+            m_state = eState::StartGame;
+        }
+    }
+        
 
         break;
     case PlatformerGame::StartGame:
+        m_state = eState::StartLevel;
 
         break;
     case PlatformerGame::StartLevel:
+    {
+        auto actor = INSTANTIATE(Actor, "Player");
+        actor->transform.position = { 100, 800 };
+        actor->Initialize();
+        ADD_ACTOR(actor);
+
+
+        m_state = eState::Game;
+    }
 
         break;
     case PlatformerGame::Game:
@@ -91,4 +108,9 @@ void PlatformerGame::OnPlayerDead(const kiko::Event& event)
 {
     m_lives--;
     m_state = eState::PlayerDeadStart;
+}
+
+void PlatformerGame::OnLevelComplete(const kiko::Event& event)
+{
+    
 }

@@ -28,7 +28,8 @@ int main(int argc, char* argv[])
 	kiko::setFilePath("assets/Platformer");
 
 	kiko::g_renderer.Initialize();
-	kiko::g_renderer.CreateWindow("CSC195", 800, 600);
+	kiko::g_renderer.CreateWindow("CSC195", 1920, 1080);
+
 	kiko::g_inputSystem.Initialize();
 	kiko::g_audioSystem.Initialize();
 	kiko::PhysicsSystem::Instance().Initialize();

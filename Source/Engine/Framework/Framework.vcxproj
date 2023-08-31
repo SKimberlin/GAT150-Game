@@ -156,6 +156,7 @@
     <ClCompile Include="Components\SpriteAnimRenderComponent.cpp" />
     <ClCompile Include="Components\SpriteRenderComponent.cpp" />
     <ClCompile Include="Components\TextRenderComponent.cpp" />
+    <ClCompile Include="Components\TilemapComponent.cpp" />
     <ClCompile Include="Emitter.cpp" />
     <ClCompile Include="Event\EventManager.cpp" />
     <ClCompile Include="Object.cpp" />
@@ -175,6 +176,7 @@
     <ClInclude Include="Components\SpriteAnimRenderComponent.h" />
     <ClInclude Include="Components\SpriteRenderComponent.h" />
     <ClInclude Include="Components\TextRenderCompnenet.h" />
+    <ClInclude Include="Components\TilemapComponent.h" />
     <ClInclude Include="Emitter.h" />
     <ClInclude Include="Event\Event.h" />
     <ClInclude Include="Event\EventManager.h" />

@@ -5,14 +5,22 @@
 			"name": "Background",
 			"persistent": true,
 			"transform": {
-				"position": [ 400, 300 ],
-				"scale": 1,
+				"position": [ 960, 400 ],
+				"scale": 3,
 				"rotation": 0
 			},
 			"components": [
 				{
 					"type": "SpriteRenderComponent",
-					"textureName": "textures/Platformer_Background.png"
+					"textureName": "textures/Backgrounds/background1.png"
+				},
+				{
+					"type": "SpriteRenderComponent",
+					"textureName": "textures/Backgrounds/background2.png"
+				},
+				{
+					"type": "SpriteRenderComponent",
+					"textureName": "textures/Backgrounds/background3.png"
 				}
 			]
 		},
@@ -30,35 +38,8 @@
 					"type": "TextRenderComponent",
 					"fontName": "Fonts/Silver.ttf",
 					"fontSize": 50,
-					"text": "Platformer+",
-					"color": [ 1, 0, 0, 1 ]
-				}
-			]
-		},
-		{
-			"type": "Actor",
-			"name": "Coin",
-			"persistent": true,
-			"transform": {
-				"position": [ 400, 300 ],
-				"scale": 1,
-				"rotation": 0
-			},
-			"components": [
-				{
-					"type": "SpriteAnimRenderComponent",
-					"defaultSequence": "idle",
-					"sequences": [
-						{
-							"name": "idle",
-							"fps": 12,
-							"numColumns": 8,
-							"numRows": 1,
-							"startFrame": 1,
-							"endFrame": 8,
-							"textureName": "Textures/Coin.png"
-						}
-					]
+					"text": "Ibrahims Peril",
+					"color": [ 0.30, 0.15, 0, 1 ]
 				}
 			]
 		}

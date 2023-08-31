@@ -3,6 +3,8 @@
 #include "Framework/Game.h"
 #include "Renderer/Text.h"
 
+#define ADD_ACTOR(actor) m_scene->Add(std::move(actor))
+
 
 class PlatformerGame : public kiko::Game, kiko::IEventListener
 {
@@ -34,6 +36,7 @@ public:
 
 	void OnAddPoints(const kiko::Event& event);
 	void OnPlayerDead(const kiko::Event& event);
+	void OnLevelComplete(const kiko::Event& event);
 
 	bool IsHardmode() { return m_hardmode; }
 	void SetHardmode() { m_hardmode ? m_hardmode = false : m_hardmode = true; }
@@ -46,6 +49,7 @@ private:
 	float m_spawnTime = 3.0f;
 	float m_stateTimer = 0;
 	bool m_hardmode = false;
+	int m_levelCount = 1;
 
 
 };

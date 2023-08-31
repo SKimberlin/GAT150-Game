@@ -33,8 +33,8 @@ namespace kiko
 
 			if (actorA->destroyed || actorB->destroyed) return;
 
-			actorA->OnCollisionEnter(actorB);
-			actorB->OnCollisionEnter(actorA);
+			actorA->OnCollisionExit(actorB);
+			actorB->OnCollisionExit(actorA);
 
 		}
 	}

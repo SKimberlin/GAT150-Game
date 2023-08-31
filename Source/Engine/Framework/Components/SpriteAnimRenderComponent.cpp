@@ -12,8 +12,11 @@ namespace kiko
 	{
 		SpriteRenderComponent::Initialize();
 
-		SetSequence(defaultSequenceName);
-		UpdateSource();
+		SetSequence(defaultSequenceName, false);
+		if (source.w == 0 && source.h == 0)
+		{
+			UpdateSource();
+		}
 
 		return true;
 	}
@@ -35,7 +38,7 @@ namespace kiko
 
 	}
 
-	void SpriteAnimRenderComponent::SetSequence(const std::string& name)
+	void SpriteAnimRenderComponent::SetSequence(const std::string& name, bool update)
 	{
 		// prevent setting same sequence
 		if (m_sequence && m_sequence->name == name) return;
@@ -49,6 +52,8 @@ namespace kiko
 			// reset frame info
 			frame = m_sequence->startFrame;
 			frameTimer = 1.0f / m_sequence->fps;
+
+			if (update) UpdateSource();
 		}
 	}
 
@@ -91,7 +96,9 @@ namespace kiko
 			}
 		}
 
-		if (!READ_DATA(value, defaultSequenceName))
+		bool temp = READ_DATA(value, defaultSequenceName);
+
+		if ( !temp )
 		{
 			// if default sequence not specified, use the first sequence in the sequences map
 			defaultSequenceName = m_sequences.begin()->first;
