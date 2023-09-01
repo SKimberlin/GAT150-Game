@@ -3,6 +3,7 @@
     {
       "type": "Actor",
       "name": "Coin",
+      "tag": "Coin",
       "persistent": true,
       "prototype": true,
       "transform": {
@@ -166,6 +167,15 @@
               "numRows": 5,
               "startFrame": 40,
               "endFrame": 43,
+              "textureName": "Textures/Enemy.png"
+            },
+            {
+              "name": "run",
+              "fps": 12,
+              "numColumns": 13,
+              "numRows": 5,
+              "startFrame": 27,
+              "endFrame": 38,
               "textureName": "Textures/Enemy.png"
             }
           ]

@@ -43,6 +43,7 @@ namespace kiko
 				}
 			}
 		}
+		
 
 		m_physicsComponent->ApplyForce(forward * speed);
 

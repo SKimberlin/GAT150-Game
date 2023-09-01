@@ -20,10 +20,13 @@ namespace kiko
 		int GetLives() const { return m_lives; }
 		void SetLives(int lives) { m_lives = lives; }
 
+		int GetCoinCount() { return m_coinsNeeded; }
+
 	protected:
 		std::unique_ptr<class Scene> m_scene;
 
 		int m_score = 0;
-		int m_lives = 0;
+		int m_lives = 3;
+		int m_coinsNeeded = 3;
 	};
 }

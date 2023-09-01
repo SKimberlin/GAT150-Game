@@ -18,6 +18,7 @@ namespace kiko
             {
                 int x = i % numColumns;
                 int y = i / numColumns;
+                
 
                 actor->transform.position = m_owner->transform.position + (vec2{ x, y } * size);
                 m_owner->m_scene->Add(std::move(actor));
@@ -29,7 +30,6 @@ namespace kiko
 
     void TilemapComponent::Update(float dt)
     {
-        //
     }
         
     void TilemapComponent::Read(const json_t& value)

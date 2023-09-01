@@ -15,6 +15,7 @@
 #include "Components/Box2dPhysicsComponent.h"
 #include "Components/SpriteAnimRenderComponent.h"
 #include "Components/TilemapComponent.h"
+#include "Components/TextRenderCompnenet.h"
 
 #include "Resource/ResourceManager.h"
 #include "Event/EventManager.h"

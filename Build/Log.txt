@@ -11,13 +11,22 @@ INFO: Factory.h(69) Class registered: Box2DPhysicsComponent
 INFO: Factory.h(69) Class registered: Box2DCollisionComponent
 INFO: Factory.h(69) Class registered: Actor
 INFO: Main.cpp(23) Main Start
-INFO: EventManager.cpp(18) Event subscribed: OnAddPoints
 INFO: EventManager.cpp(18) Event subscribed: OnPlayerDead
 INFO: EventManager.cpp(18) Event subscribed: OnLevelComplete
-INFO: Factory.h(77) Prototype Class registered: tile01
-INFO: Factory.h(77) Prototype Class registered: tile02
-INFO: Factory.h(77) Prototype Class registered: tile03
+INFO: EventManager.cpp(18) Event subscribed: OnCoinPickup
 INFO: Factory.h(77) Prototype Class registered: Coin
 INFO: Factory.h(77) Prototype Class registered: Player
 INFO: Factory.h(77) Prototype Class registered: Crate
 INFO: Factory.h(77) Prototype Class registered: Enemy
+INFO: Factory.h(77) Prototype Class registered: tile01
+INFO: Factory.h(77) Prototype Class registered: tile02
+INFO: Factory.h(77) Prototype Class registered: tile03
+INFO: Factory.h(77) Prototype Class registered: tile01
+INFO: Factory.h(77) Prototype Class registered: tile02
+INFO: Factory.h(77) Prototype Class registered: tile03
+INFO: Factory.h(77) Prototype Class registered: tile01
+INFO: Factory.h(77) Prototype Class registered: tile02
+INFO: Factory.h(77) Prototype Class registered: tile03
+INFO: Factory.h(77) Prototype Class registered: tile01
+INFO: Factory.h(77) Prototype Class registered: tile02
+INFO: Factory.h(77) Prototype Class registered: tile03

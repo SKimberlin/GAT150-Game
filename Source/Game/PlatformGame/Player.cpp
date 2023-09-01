@@ -27,29 +27,29 @@ namespace kiko
 	{
 		Actor::Update(dt);
 
-		vec2 forward = kiko::vec2{ 1, 0 };
+		vec2 forward = kiko::vec2{ 1.0f, 0.0f };
 		vec2 velocity = m_physicsComponent->velocity;
 		bool onGround = (groundCount > 0);
 		
 		
 
 		// movement
-		float dir = 0;
-		if (kiko::g_inputSystem.GetKeyDown(SDL_SCANCODE_A)) dir = -1;
-		if (kiko::g_inputSystem.GetKeyDown(SDL_SCANCODE_D)) dir = 1;
+		float dir = 0.0f;
+		if (kiko::g_inputSystem.GetKeyDown(SDL_SCANCODE_A)) dir = -1.0f;
+		if (kiko::g_inputSystem.GetKeyDown(SDL_SCANCODE_D)) dir = 1.0f;
 
 		
 			
 		if (kiko::g_inputSystem.GetKeyDown(SDL_SCANCODE_Z) && !g_inputSystem.GetPreviousKeyDown(SDL_SCANCODE_Z) && std::abs(dir) > 0)
 		{
 			m_spriteAnimRenderComponent->SetSequence("roll");
-			forward = vec2{ 30, 0 };
+			forward = vec2{ 3.0f, 0.0f };
 		}
 
 		// jump
 		if (onGround && kiko::g_inputSystem.GetKeyDown(SDL_SCANCODE_SPACE) && !kiko::g_inputSystem.GetPreviousKeyDown(SDL_SCANCODE_SPACE))
 		{
-			m_physicsComponent->SetVelocity(vec2{ velocity.x, -1 * jump });
+			m_physicsComponent->SetVelocity(vec2{ velocity.x, -1.0f * jump });
 			m_spriteAnimRenderComponent->SetSequence("jump");
 		}
 		if (velocity.y > 0.2f && m_spriteAnimRenderComponent->GetSequenceName() != "fall")
@@ -91,15 +91,24 @@ namespace kiko
 		
 
 
-		m_physicsComponent->ApplyForce(forward * speed * dir * (onGround ? 1 : 0.5));
+		m_physicsComponent->ApplyForce(forward * speed * dir * (onGround ? 1.0f : 0.5));
 	}
 
 	void Player::OnCollisionEnter(Actor* other)
 	{
 		if (other->tag == "Ground") groundCount++;
-		if (other->tag == "Exit")
+		if (other->tag == "Exit" && m_game->GetCoinCount() <= 0)
 		{
 			kiko::EventManager::Instance().DispatchEvent("OnLevelComplete", 0);
+		}
+		if (other->tag == "Enemy" && m_spriteAnimRenderComponent->GetSequenceName() != "roll")
+		{
+			kiko::EventManager::Instance().DispatchEvent("OnPlayerDead", 0);
+		}
+		if (other->tag == "Coin")
+		{
+			kiko::EventManager::Instance().DispatchEvent("OnCoinPickup", 0);
+			other->destroyed = true;
 		}
 	}
 

@@ -39,10 +39,22 @@
     <None Include="..\..\..\Build\Assets\Platformer\Scenes\PlatformerScene.json">
       <Filter>Resources</Filter>
     </None>
-    <None Include="..\..\..\Build\Assets\Platformer\Scenes\tilemap.json">
+    <None Include="..\..\..\Build\Assets\Platformer\Scenes\Level1.json">
       <Filter>Resources</Filter>
     </None>
     <None Include="..\..\..\Build\Assets\Platformer\Scenes\prototypes.json">
+      <Filter>Resources</Filter>
+    </None>
+    <None Include="..\..\..\Build\Assets\Platformer\Scenes\Level2.json">
+      <Filter>Resources</Filter>
+    </None>
+    <None Include="..\..\..\Build\Assets\Platformer\Scenes\Level3.json">
+      <Filter>Resources</Filter>
+    </None>
+    <None Include="..\..\..\Build\Assets\Platformer\Scenes\Level4.json">
+      <Filter>Resources</Filter>
+    </None>
+    <None Include="..\..\..\Build\Assets\Platformer\Scenes\Level5.json">
       <Filter>Resources</Filter>
     </None>
   </ItemGroup>

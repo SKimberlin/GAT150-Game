@@ -22,6 +22,7 @@ namespace kiko
 		float speed = 0;
 		float health = 100;
 
-		kiko::PhysicsComponent* m_physicsComponent = nullptr;
+		PhysicsComponent* m_physicsComponent = nullptr;
+		class SpriteAnimRenderComponent* m_spriteAnimRenderComponent = nullptr;
 	};
 }

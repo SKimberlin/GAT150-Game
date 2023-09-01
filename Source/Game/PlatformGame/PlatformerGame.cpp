@@ -13,24 +13,16 @@ bool PlatformerGame::Initialize()
 {
 
     // load audio
-    kiko::g_audioSystem.AddAudio("Laser_Shoot", "Laser_Shoot.wav");
-    kiko::g_audioSystem.AddAudio("EnemyDeath", "EnemyDeath.wav");
-    kiko::g_audioSystem.AddAudio("FireBall", "FireBall.wav");
-    kiko::g_audioSystem.AddAudio("MuchHigher", "MuchHigher.wav");
-    kiko::g_audioSystem.PlayOneShot("MuchHigher", true);
-
+    
     // add events
-    EVENT_SUBSCRIBE("OnAddPoints", PlatformerGame::OnAddPoints);
     EVENT_SUBSCRIBE("OnPlayerDead", PlatformerGame::OnPlayerDead);
     EVENT_SUBSCRIBE("OnLevelComplete", PlatformerGame::OnLevelComplete);
+    EVENT_SUBSCRIBE("OnCoinPickup", PlatformerGame::OnCoinPickup);
 
     //kiko::EventManager::Instance().Subscribe("OnAddPoints", this, std::bind(&PlatformerGame::OnAddPoints, this, std::placeholders::_1));
     //kiko::EventManager::Instance().Subscribe("OnPlayerDead", this, std::bind(&PlatformerGame::OnPlayerDead, this, std::placeholders::_1));
     m_scene = std::make_unique<kiko::Scene>();
-    m_scene->Load("Scenes/PlatformerScene.json");
-    m_scene->Load("Scenes/tilemap.json");
-    m_scene->Load("Scenes/prototypes.json");
-    m_scene->Initialize();
+    
 
     
 
@@ -45,31 +37,34 @@ void PlatformerGame::Update(float dt)
 {
     switch (m_state)
     {
+    case PlatformerGame::Load:
+        m_scene->Load("Scenes/PlatformerScene.json");
+        m_scene->Load("Scenes/prototypes.json");
+        m_scene->Initialize();
+        m_state = eState::Title;
+        break;
     case PlatformerGame::Title:
     {
         m_scene->GetActorByName("Title")->active = true;
+        m_scene->GetActorByName("Lives")->active = false;
+        
         if (kiko::g_inputSystem.GetKeyDown(SDL_SCANCODE_SPACE))
         {
             m_state = eState::StartGame;
         }
     }
-        
-
         break;
     case PlatformerGame::StartGame:
         m_state = eState::StartLevel;
 
         break;
     case PlatformerGame::StartLevel:
-    {
-        auto actor = INSTANTIATE(Actor, "Player");
-        actor->transform.position = { 100, 800 };
-        actor->Initialize();
-        ADD_ACTOR(actor);
-
-
+        m_scene->GetActorByName("Lives")->active = true;
+        
+        
+        LoadLevel();
+        
         m_state = eState::Game;
-    }
 
         break;
     case PlatformerGame::Game:
@@ -77,13 +72,26 @@ void PlatformerGame::Update(float dt)
         break;
     }
     case PlatformerGame::PlayerDeadStart:
+        m_scene->RemoveAll();
+        if (m_lives <= 0)
+        {
+            m_state = eState::GameOverStart;
+        }
+        else 
+        {
+            m_state = eState::PlayerDead;
+        }
 
         break;
     case PlatformerGame::PlayerDead:
-
+        m_state = eState::StartLevel;
+        break;
+    case PlatformerGame::GameOverStart:
+        m_state = eState::GameOver;
         break;
     case PlatformerGame::GameOver:
-
+        m_lives = 3;
+        m_state = eState::Title;
         break;
     default:
         break;
@@ -93,15 +101,93 @@ void PlatformerGame::Update(float dt)
     kiko::g_particleSystem.Update(dt);
 }
 
+void PlatformerGame::LoadLevel()
+{
+    m_scene->RemoveAll();
+    switch (m_levelCount)
+    {
+    case 1:
+        m_scene->Load("Scenes/Level1.json");
+        {
+            auto actor = INSTANTIATE(Actor, "Coin");
+            actor->transform.position = { 100, 40 };
+            actor->Initialize();
+            ADD_ACTOR(actor);
+        }
+        {
+            auto actor = INSTANTIATE(Actor, "Coin");
+            actor->transform.position = { 100, 420 };
+            actor->Initialize();
+            ADD_ACTOR(actor);
+        }
+        {
+            auto actor = INSTANTIATE(Actor, "Coin");
+            actor->transform.position = { 1600, 490 };
+            actor->Initialize();
+            ADD_ACTOR(actor);
+        }
+        break;
+    case 2:
+        m_scene->Load("Scenes/Level2.json");
+        {
+            auto actor = INSTANTIATE(Actor, "Coin");
+            actor->transform.position = { 1600, 90 };
+            actor->Initialize();
+            ADD_ACTOR(actor);
+        }
+        {
+            auto actor = INSTANTIATE(Actor, "Coin");
+            actor->transform.position = { 60, 420 };
+            actor->Initialize();
+            ADD_ACTOR(actor);
+        }
+        {
+            auto actor = INSTANTIATE(Actor, "Coin");
+            actor->transform.position = { 1600, 740 };
+            actor->Initialize();
+            ADD_ACTOR(actor);
+        }
+        break;
+    case 3:
+        m_scene->Load("Scenes/Level3.json");
+        break;
+    case 4:
+        m_scene->Load("Scenes/Level4.json");
+        break;
+    case 5:
+        m_scene->Load("Scenes/Level5.json");
+        break;
+    default:
+        m_scene->Load("Scenes/Level1.json");
+        break;
+
+    }
+    m_scene->Initialize();
+    {
+        auto actor = INSTANTIATE(Actor, "Player");
+        actor->transform.position = { 100, 900 };
+        actor->m_game = this;
+        actor->Initialize();
+        ADD_ACTOR(actor);
+    }
+    {
+        auto actor = INSTANTIATE(Actor, "Enemy");
+        actor->transform.position = { 800, 900 };
+        actor->Initialize();
+        ADD_ACTOR(actor);
+    }
+    m_coinsNeeded = 3;
+}
+
 void PlatformerGame::Draw(kiko::Renderer& renderer)
 {
     m_scene->Draw(renderer);
     kiko::g_particleSystem.Draw(renderer);
 }
 
-void PlatformerGame::OnAddPoints(const kiko::Event& event)
+void PlatformerGame::OnCoinPickup(const kiko::Event& event)
 {
-    m_score += std::get<int>(event.data);
+    m_coinsNeeded--;
 }
 
 void PlatformerGame::OnPlayerDead(const kiko::Event& event)
@@ -112,5 +198,13 @@ void PlatformerGame::OnPlayerDead(const kiko::Event& event)
 
 void PlatformerGame::OnLevelComplete(const kiko::Event& event)
 {
-    
+    if (m_levelCount == 5)
+    {
+
+    }
+    else
+    {
+        m_levelCount++;
+        m_state = eState::StartLevel;
+    }
 }

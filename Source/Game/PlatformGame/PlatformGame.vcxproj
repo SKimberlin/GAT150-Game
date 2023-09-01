@@ -178,9 +178,13 @@
     <ClInclude Include="Player.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\..\Build\Assets\Platformer\Scenes\Level2.json" />
+    <None Include="..\..\..\Build\Assets\Platformer\Scenes\Level3.json" />
+    <None Include="..\..\..\Build\Assets\Platformer\Scenes\Level4.json" />
+    <None Include="..\..\..\Build\Assets\Platformer\Scenes\Level5.json" />
     <None Include="..\..\..\Build\Assets\Platformer\Scenes\PlatformerScene.json" />
     <None Include="..\..\..\Build\Assets\Platformer\Scenes\prototypes.json" />
-    <None Include="..\..\..\Build\Assets\Platformer\Scenes\tilemap.json" />
+    <None Include="..\..\..\Build\Assets\Platformer\Scenes\Level1.json" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

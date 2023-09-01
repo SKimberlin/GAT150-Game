@@ -11,6 +11,7 @@ class PlatformerGame : public kiko::Game, kiko::IEventListener
 public:
 	enum eState
 	{
+		Load,
 		Title,
 		StartGame,
 		StartLevel,
@@ -34,22 +35,21 @@ public:
 
 	void SetState(eState state) { m_state = state; }
 
-	void OnAddPoints(const kiko::Event& event);
+	void LoadLevel();
+
+	void OnCoinPickup(const kiko::Event& event);
 	void OnPlayerDead(const kiko::Event& event);
 	void OnLevelComplete(const kiko::Event& event);
-
-	bool IsHardmode() { return m_hardmode; }
-	void SetHardmode() { m_hardmode ? m_hardmode = false : m_hardmode = true; }
 
 	void SetSpawnTime(float spawnTime) { m_spawnTime = spawnTime; }
 
 private:
-	eState m_state = eState::Title;
+	eState m_state = eState::Load;
 	float m_spawnTimer = 0.0f;
 	float m_spawnTime = 3.0f;
 	float m_stateTimer = 0;
-	bool m_hardmode = false;
 	int m_levelCount = 1;
+	
 
 
 };

@@ -47,6 +47,7 @@ namespace kiko
 			(force || !(*iter)->persistent) ? iter = m_actors.erase(iter) : iter++;
 		}
 	}
+
 	bool Scene::Load(const std::string& filename)
 	{
 		rapidjson::Document document;

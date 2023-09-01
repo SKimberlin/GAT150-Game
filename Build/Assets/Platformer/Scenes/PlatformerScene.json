@@ -29,8 +29,8 @@
 			"name": "Title",
 			"persistent": true,
 			"transform": {
-				"position": [ 400, 300 ],
-				"scale": 2,
+				"position": [ 860, 540 ],
+				"scale": 4,
 				"rotation": 0
 			},
 			"components": [
@@ -39,6 +39,25 @@
 					"fontName": "Fonts/Silver.ttf",
 					"fontSize": 50,
 					"text": "Ibrahims Peril",
+					"color": [ 0.30, 0.15, 0, 1 ]
+				}
+			]
+		},
+		{
+			"type": "Actor",
+			"name": "Lives",
+			"persistent": true,
+			"transform": {
+				"position": [ 1400, 50 ],
+				"scale": 2,
+				"rotation": 0
+			},
+			"components": [
+				{
+					"type": "TextRenderComponent",
+					"fontName": "Fonts/Silver.ttf",
+					"fontSize": 50,
+					"text": "Lives: ",
 					"color": [ 0.30, 0.15, 0, 1 ]
 				}
 			]
